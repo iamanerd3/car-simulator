@@ -82,11 +82,6 @@ public class Drivetrain {
         // Split power between left and right wheels
         frontWheelPowers = this.frontDifferential.distributePower(frontAxlePower);
         rearWheelPowers = this.rearDifferential.distributePower(rearAxlePower);
-
-        System.out.println("Front Left Wheel Power: " + frontWheelPowers[0]);
-        System.out.println("Front Right Wheel Power: " + frontWheelPowers[1]);
-        System.out.println("Rear Left Wheel Power: " + rearWheelPowers[0]);
-        System.out.println("Rear Right Wheel Power: " + rearWheelPowers[1]);
     }
 
     void tick() {

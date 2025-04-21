@@ -1,5 +1,5 @@
 public class Wheel {
-    private float radiusInch = 20f;
+    private float radiusInch = 10f;
     private float radiusM = this.radiusInch * 0.0254f; // Convert inches to meters
     private float inputTorque; // Torque from the drivetrain
     private float linearForce; // Linear force at the wheel
