@@ -1,7 +1,9 @@
+package dev.bromine.car_simulator.car;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JFrame;
 import java.text.DecimalFormat;
+import javax.swing.JFrame;
 
 public class CarSimulator {
     static Car car = new Car();
@@ -18,12 +20,11 @@ public class CarSimulator {
             updateGasPedal();
             car.setAcceleratorPedal(gasPedal);
             car.tick();
-            System.out.println("Speed: " + df.format(car.getSpeedKmh()) + " km/h | Gas Pedal: " + df.format(gasPedal));
+            System.out.print("\rSpeed: " + df.format(car.getSpeedKmh()) + " km/h | Gas Pedal: " + df.format(gasPedal));
 
             try {
-                Thread.sleep(10); // Delay to control simulation speed
+                Thread.sleep(50); // Delay to control simulation speed
             } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -70,9 +71,9 @@ public class CarSimulator {
     // Method to update the gas pedal value
     private static void updateGasPedal() {
         if (isGasPressed) {
-            gasPedal = Math.min(gasPedal + 0.01f, 1f); // Increase gas pedal, max 1.0
+            gasPedal = Math.min(gasPedal + 0.03f, 1f); // Increase gas pedal, max 1.0
         } else {
-            gasPedal = Math.max(gasPedal - 0.2f, 0f); // Gradually decrease gas pedal
+            gasPedal = Math.max(gasPedal - 0.05f, 0f); // Gradually decrease gas pedal
         }
     }
 }

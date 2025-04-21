@@ -1,3 +1,5 @@
+package dev.bromine.car_simulator.car;
+
 public class Wheel {
     private float radiusInch = 10f;
     private float radiusM = this.radiusInch * 0.0254f; // Convert inches to meters

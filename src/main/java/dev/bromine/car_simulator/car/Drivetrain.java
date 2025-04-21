@@ -1,17 +1,19 @@
+package dev.bromine.car_simulator.car;
+
 import java.util.HashMap;
 
 public class Drivetrain {
 
     // Power splitters for transfer case and differentials
-    private PowerSplitter transferCase = new PowerSplitter(); // Front/rear axle split
-    private PowerSplitter frontDifferential = new PowerSplitter(); // Left/right front wheels
-    private PowerSplitter rearDifferential = new PowerSplitter(); // Left/right rear wheels
+    private final PowerSplitter transferCase = new PowerSplitter(); // Front/rear axle split
+    private final PowerSplitter frontDifferential = new PowerSplitter(); // Left/right front wheels
+    private final PowerSplitter rearDifferential = new PowerSplitter(); // Left/right rear wheels
 
-    private Transmission transmission = new Transmission(); // Transmission object
-    private Wheel[] wheels = new Wheel[4]; // Array of the 4 wheels that power gets distributed to
-    private HashMap<String, Wheel> wheelMap = new HashMap<>(); // Map of wheels for easy access
+    private final Transmission transmission = new Transmission(); // Transmission object
+    private final Wheel[] wheels = new Wheel[4]; // Array of the 4 wheels that power gets distributed to
+    private final HashMap<String, Wheel> wheelMap = new HashMap<>(); // Map of wheels for easy access
 
-    private float finalDriveRatio = 4.17f; // Final drive ratio for the drivetrain
+    private final float finalDriveRatio = 4.17f; // Final drive ratio for the drivetrain
     private float[] frontWheelPowers = new float[2]; // Power distribution for front wheels
     private float[] rearWheelPowers = new float[2]; // Power distribution for rear wheels
     private float finalDriveTorque;

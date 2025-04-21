@@ -1,3 +1,5 @@
+package dev.bromine.car_simulator.car;
+
 public class PowerSplitter {
     private float leftPowerDistribution;
     private float rightPowerDistribution;

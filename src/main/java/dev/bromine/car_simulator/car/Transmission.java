@@ -1,6 +1,8 @@
+package dev.bromine.car_simulator.car;
+
 public class Transmission {
     // manual gear ratios, index 0 is reverse, 1 is 1st gear, 2 is 2nd gear, etc.
-    private float[] manualGearRatios = { 3.97f, 5.25f, 3.27f, 2.19f, 1.60f, 1.30f, 1.00f, 0.78f, 0.65f, 0.58f, 0.52f };
+    private final float[] manualGearRatios = { 3.97f, 5.25f, 3.27f, 2.19f, 1.60f, 1.30f, 1.00f, 0.78f, 0.65f, 0.58f, 0.52f };
     private float inputRpm = 0; // RPM from the engine
     private float inputTorque; // Torque from the engine
     private int manualGear = 1; // -1 indicates no gear/neutral
@@ -41,6 +43,13 @@ public class Transmission {
 
     public void setInputTorque(float inputTorque) {
         this.inputTorque = inputTorque;
+    }
+
+    public void setManualGear(int manualGear) {
+        if (manualGear < -1 || manualGear >= manualGearRatios.length) {
+            throw new IllegalArgumentException("Invalid gear selected: " + manualGear);
+        }
+        this.manualGear = manualGear;
     }
     // #endregion
 

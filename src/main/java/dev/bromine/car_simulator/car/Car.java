@@ -1,6 +1,8 @@
+package dev.bromine.car_simulator.car;
+
 public class Car {
-    private Engine engine;
-    private Drivetrain drivetrain;
+    private final Engine engine;
+    private final Drivetrain drivetrain;
 
     private float acceleratorPedal;
     private float brakePedal;

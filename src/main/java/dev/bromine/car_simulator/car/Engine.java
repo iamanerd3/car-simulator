@@ -1,7 +1,9 @@
+package dev.bromine.car_simulator.car;
+
 public class Engine {
     private final float maxTorqueLbFt = 267f;
     private float outputTorque = 267;
-    private float outputRpm = 750;
+    private final float outputRpm = 750;
     private final float maxTorqueNm = this.maxTorqueLbFt * 1.356f;
     private float gasIntake;
     // TODO: engine rpm
