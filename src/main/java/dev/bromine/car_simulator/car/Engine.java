@@ -4,25 +4,28 @@ public class Engine {
     private final float maxTorqueLbFt = 267f;
     private float outputTorque = 267;
     private final float outputRpm = 750;
-    private final float maxTorqueNm = this.maxTorqueLbFt * 1.356f;
+    private final float maxTorqueNm = maxTorqueLbFt * 1.356f;
     private float gasIntake;
-    // TODO: engine rpm
+
+    public void tick() {
+        outputTorque = maxTorqueNm * gasIntake;
+    }
 
     // #region Getters
     public float getOutputTorque() {
-        return this.outputTorque;
+        return outputTorque;
     }
 
     public float getOutputRpm() {
-        return this.outputRpm;
+        return outputRpm;
     }
 
     public float getMaxTorqueNm() {
-        return this.maxTorqueNm;
+        return maxTorqueNm;
     }
 
     public float getGasIntake() {
-        return this.gasIntake;
+        return gasIntake;
     }
     // #endregion
 
@@ -31,11 +34,4 @@ public class Engine {
         this.gasIntake = gasIntake;
     }
     // #endregion
-
-    public void tick() {
-        this.outputTorque = this.maxTorqueNm * this.gasIntake;
-    }
-
-    public static void main(String[] args) {
-    }
 }

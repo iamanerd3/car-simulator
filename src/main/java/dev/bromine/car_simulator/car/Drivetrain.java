@@ -32,73 +32,15 @@ public class Drivetrain {
         }
     }
 
-    // #region Getters
-    public float getFinalDriveRatio() {
-        return this.finalDriveRatio;
-    }
-
-    public PowerSplitter getTransferCase() {
-        return this.transferCase;
-    }
-
-    public PowerSplitter getFrontDifferential() {
-        return this.frontDifferential;
-    }
-
-    public PowerSplitter getRearDifferential() {
-        return this.rearDifferential;
-    }
-
-    public Transmission getTransmission() {
-        return this.transmission;
-    }
-
-    public HashMap<String, Wheel> getWheelMap() {
-        return this.wheelMap;
-    }
-
-    public float[] getFrontWheelPowers() {
-        return this.frontWheelPowers;
-    }
-
-    public float[] getRearWheelPowers() {
-        return this.rearWheelPowers;
-    }
-
-    public float getFinalDriveTorque() {
-        return this.finalDriveTorque;
-    }
-
-    public float getTotalLinearForce() {
-        return this.totalLinearForce;
-    }
-    // #endregion
-
-    // Power distribution logic
-    public void calculatePowerDistribution(float enginePower) {
-        // Split power between front and rear axles
-        float[] axlePowers = this.transferCase.distributePower(enginePower);
-        float frontAxlePower = axlePowers[0];
-        float rearAxlePower = axlePowers[1];
-
-        // Split power between left and right wheels
-        frontWheelPowers = this.frontDifferential.distributePower(frontAxlePower);
-        rearWheelPowers = this.rearDifferential.distributePower(rearAxlePower);
-    }
-
     void tick() {
-        this.transmission.tick(); // Update transmission state
-        this.calculatePowerDistribution(1f);
+        transmission.tick(); // Update transmission state
+        calculatePowerDistribution(1f);
 
-        finalDriveTorque = this.transmission.getOutputTorque() * this.finalDriveRatio; // Calculate final drive torque
-        wheelMap.get("FL")
-                .setInputTorque(finalDriveTorque * frontWheelPowers[0]); // Set torque for front left wheel
-        wheelMap.get("FR")
-                .setInputTorque(finalDriveTorque * frontWheelPowers[1]); // Set torque for front right wheel
-        wheelMap.get("RL")
-                .setInputTorque(finalDriveTorque * rearWheelPowers[0]); // Set torque for rear left wheel
-        wheelMap.get("RR")
-                .setInputTorque(finalDriveTorque * rearWheelPowers[1]); // Set torque for rear right wheel
+        finalDriveTorque = transmission.getOutputTorque() * finalDriveRatio; // Calculate final drive torque
+        wheelMap.get("FL").setInputTorque(finalDriveTorque * frontWheelPowers[0]); // Set torque for front left wheel
+        wheelMap.get("FR").setInputTorque(finalDriveTorque * frontWheelPowers[1]); // Set torque for front right wheel
+        wheelMap.get("RL").setInputTorque(finalDriveTorque * rearWheelPowers[0]); // Set torque for rear left wheel
+        wheelMap.get("RR").setInputTorque(finalDriveTorque * rearWheelPowers[1]); // Set torque for rear right wheel
 
         for (Wheel wheel : wheels) {
             wheel.tick(); // Update each wheel state
@@ -111,7 +53,57 @@ public class Drivetrain {
         }
     }
 
-    public static void main(String[] args) {
+    // Power distribution logic
+    public void calculatePowerDistribution(float enginePower) {
+        // Split power between front and rear axles
+        float[] axlePowers = transferCase.distributePower(enginePower);
+        float frontAxlePower = axlePowers[0];
+        float rearAxlePower = axlePowers[1];
 
+        // Split power between left and right wheels
+        frontWheelPowers = frontDifferential.distributePower(frontAxlePower);
+        rearWheelPowers = rearDifferential.distributePower(rearAxlePower);
     }
+
+    // #region Getters
+    public float getFinalDriveRatio() {
+        return finalDriveRatio;
+    }
+
+    public PowerSplitter getTransferCase() {
+        return transferCase;
+    }
+
+    public PowerSplitter getFrontDifferential() {
+        return frontDifferential;
+    }
+
+    public PowerSplitter getRearDifferential() {
+        return rearDifferential;
+    }
+
+    public Transmission getTransmission() {
+        return transmission;
+    }
+
+    public HashMap<String, Wheel> getWheelMap() {
+        return wheelMap;
+    }
+
+    public float[] getFrontWheelPowers() {
+        return frontWheelPowers;
+    }
+
+    public float[] getRearWheelPowers() {
+        return rearWheelPowers;
+    }
+
+    public float getFinalDriveTorque() {
+        return finalDriveTorque;
+    }
+
+    public float getTotalLinearForce() {
+        return totalLinearForce;
+    }
+    // #endregion
 }

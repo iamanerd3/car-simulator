@@ -20,6 +20,13 @@ public class PowerSplitter {
         this.rightPowerDistribution = rightPowerDistribution;
     }
 
+    public float[] distributePower(float totalPower) {
+        float leftPower = totalPower * leftPowerDistribution;
+        float rightPower = totalPower * rightPowerDistribution;
+        return new float[] { leftPower, rightPower };
+    }
+
+    // #region Getters
     public float getLeftPowerDistribution() {
         return leftPowerDistribution;
     }
@@ -27,10 +34,5 @@ public class PowerSplitter {
     public float getRightPowerDistribution() {
         return rightPowerDistribution;
     }
-
-    public float[] distributePower(float totalPower) {
-        float leftPower = totalPower * leftPowerDistribution;
-        float rightPower = totalPower * rightPowerDistribution;
-        return new float[] { leftPower, rightPower };
-    }
+    // #endregion
 }
